@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Setu — Offline Safety Map</title>
+<meta name="theme-color" content="#21295C" />
+<link rel="manifest" href="manifest.json" />
+<link rel="icon" href="icons/icon-192.png" />
+<link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+<!-- Leaflet CSS (cached by service worker after first load) -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Top bar -->
+  <header class="topbar">
+    <div class="brand">Setu</div>
+    <div id="net-status" class="net-status offline">● Offline mode</div>
+  </header>
+
+  <!-- Screens -->
+  <main id="app">
+
+    <!-- MAP SCREEN -->
+    <section id="screen-map" class="screen active">
+      <div id="map"></div>
+      <div class="map-controls">
+        <button id="btn-locate" class="fab" title="Center on me">⦿</button>
+      </div>
+      <div class="nearest-bar">
+        <button class="chip" data-category="hospital">🏥 Nearest Hospital</button>
+        <button class="chip" data-category="police">🚓 Nearest Police</button>
+        <button class="chip" data-category="legal">⚖️ Legal Aid</button>
+        <button class="chip" data-category="embassy">🏛️ Embassy</button>
+      </div>
+    </section>
+
+    <!-- INFO SCREEN -->
+    <section id="screen-info" class="screen">
+      <h1 class="screen-title">Safety Info</h1>
+      <div class="info-grid" id="info-grid"></div>
+      <div id="info-detail" class="info-detail hidden">
+        <button id="info-back" class="back-btn">← Back</button>
+        <h2 id="info-detail-title"></h2>
+        <div id="info-detail-body"></div>
+      </div>
+    </section>
+
+    <!-- SOS SCREEN -->
+    <section id="screen-sos" class="screen">
+      <div class="sos-wrap">
+        <button id="sos-button" class="sos-button">SOS</button>
+        <p class="sos-hint">Press and hold to activate. Strobe, alarm, and SMS alert will trigger together.</p>
+        <div id="sos-status" class="sos-status"></div>
+        <button id="sos-cancel" class="sos-cancel hidden">Cancel SOS</button>
+      </div>
+    </section>
+
+    <!-- CONTACTS SCREEN -->
+    <section id="screen-contacts" class="screen">
+      <h1 class="screen-title">Emergency Contacts</h1>
+      <p class="screen-sub">Set up to 5 personal contacts. They'll receive your GPS location if you trigger SOS.</p>
+      <div id="contacts-list" class="contacts-list"></div>
+    </section>
+
+  </main>
+
+  <!-- Bottom nav -->
+  <nav class="bottomnav">
+    <button class="navbtn active" data-screen="screen-map">
+      <span class="navicon">🗺️</span><span>Map</span>
+    </button>
+    <button class="navbtn" data-screen="screen-info">
+      <span class="navicon">📋</span><span>Info</span>
+    </button>
+    <button class="navbtn navbtn-sos" data-screen="screen-sos">
+      <span class="navicon">🆘</span><span>SOS</span>
+    </button>
+    <button class="navbtn" data-screen="screen-contacts">
+      <span class="navicon">👤</span><span>Contacts</span>
+    </button>
+  </nav>
+
+  <!-- Hidden looping alarm audio -->
+  <audio id="alarm-audio" src="assets/alarm.wav" loop preload="auto"></audio>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/data.js"></script>
+<script src="js/geo.js"></script>
+<script src="js/map.js"></script>
+<script src="js/info.js"></script>
+<script src="js/contacts.js"></script>
+<script src="js/sos.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

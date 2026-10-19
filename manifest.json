@@ -1,0 +1,14 @@
+{
+  "name": "Setu — Offline Safety Map",
+  "short_name": "Setu",
+  "description": "Offline-first city safety map and SOS system for internet-shutdown zones.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#21295C",
+  "theme_color": "#21295C",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
